@@ -1,0 +1,19 @@
+version: '3.9'
+
+name: flexgen-docker
+
+services:
+  flexgen:
+    build: .
+    restart: always
+    image: flexgen:1
+    tty: true
+    volumes:
+      - ./work:/root
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ '0' ]
+              capabilities: [ gpu ]
